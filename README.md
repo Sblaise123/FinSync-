@@ -49,7 +49,6 @@ Frontend → Vercel
 
 Backend → Render / Railway
 
-🏗️ Project Structure
 finsync/
 ├── frontend/        # Next.js app
 │   ├── app/         # Pages (dashboard, auth, analytics)
