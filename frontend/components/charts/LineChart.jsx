@@ -1,55 +1,26 @@
-'use client'
-import { Line } from 'react-chartjs-2'
+'use client';
+import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
+  LineElement,
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
-  Title,
   Tooltip,
   Legend,
-  Filler
-} from 'chart.js'
+} from 'chart.js';
+import React from 'react';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-)
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
-export default function LineChart({ data, title }) {
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: title,
-        font: {
-          size: 16,
-          weight: 'bold'
-        }
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-            callback: function(value) {
-              return '+ ' + value.toLocaleString()
-            }
-          }
-      }
-    }
+const LineChart = ({ data }) => {
+  // ✅ Add a safety check for data
+  if (!data || !data.months || !data.income) {
+    return (
+      <div className="flex items-center justify-center h-64 text-gray-400">
+        Loading chart data...
+      </div>
+    );
   }
 
   const chartData = {
@@ -58,23 +29,38 @@ export default function LineChart({ data, title }) {
       {
         label: 'Income',
         data: data.income,
-        borderColor: 'rgb(34, 197, 94)',
-        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+        borderColor: 'rgb(75, 192, 192)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        tension: 0.4,
         fill: true,
       },
       {
         label: 'Expenses',
         data: data.expenses,
-        borderColor: 'rgb(239, 68, 68)',
-        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        tension: 0.4,
         fill: true,
       },
     ],
-  }
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: { display: true, position: 'bottom' },
+    },
+    scales: {
+      x: { grid: { color: 'rgba(200, 200, 200, 0.1)' } },
+      y: { grid: { color: 'rgba(200, 200, 200, 0.1)' } },
+    },
+  };
 
   return (
-    <div style={{ width: '100%', height: '100%' }}>
+    <div className="p-4 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
       <Line data={chartData} options={options} />
     </div>
-  )
-}
+  );
+};
+
+export default LineChart;

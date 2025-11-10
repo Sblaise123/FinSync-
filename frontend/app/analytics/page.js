@@ -1,7 +1,9 @@
+"use client"
+
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Navbar from '@/components/Navbar'
-import DoughnutChart from '@/components/charts/DoughnutChart'
+import Navbar from '@/components/ui/Navbar'  
+import PieChart from '@/components/charts/PieChart'
 import { transactionsAPI } from '@/lib/api'
 import { isAuthenticated } from '@/lib/auth'
 
@@ -80,7 +82,7 @@ export default function Analytics() {
           {/* Chart */}
           <div className="md:col-span-2 bg-white p-6 rounded shadow">
             {categoryStats.length > 0 ? (
-              <DoughnutChart
+              <PieChart
                 data={categoryStats}
                 title={`${transactionType === 'expense' ? 'Expense' : 'Income'} by Category`}
               />

@@ -4,13 +4,13 @@ export const setAuth = (token, user) => {
 }
 
 export const getAuth = () => {
+  if (typeof window === 'undefined') return { token: null, user: null }
+
   const token = localStorage.getItem('token')
   const user = localStorage.getItem('user')
-  return {
-    token,
-    user: user ? JSON.parse(user) : null,
-  }
+  return { token, user }
 }
+
 
 export const clearAuth = () => {
   localStorage.removeItem('token')
