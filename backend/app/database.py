@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from decouple import config
 
 DATABASE_URL = config('DATABASE_URL', default='sqlite:///./finsync.db')
-
+    engine = create_engine(DATABASE_URL, pool_pre_ping=True, future=True)
 if DATABASE_URL.startswith('sqlite'):
     engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 else:
