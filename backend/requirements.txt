@@ -9,3 +9,4 @@ python-decouple==3.8
 pydantic==2.5.2
 pydantic-core==2.14.5
 pydantic-settings==2.1.0
+email-validator==2.1.0
