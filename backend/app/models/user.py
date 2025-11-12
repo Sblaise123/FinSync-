@@ -1,14 +1,7 @@
-from sqlalchemy import Column, Integer, String,
+from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.database import Base
-
-def get_user_model(Base):
-    class User(Base):
-        __tablename__ = "users"
-        id = Column(Integer, primary_key=True)
-        username = Column(String, unique=True, nullable=False)
-    return User
 
 class User(Base):
     __tablename__ = "users"
