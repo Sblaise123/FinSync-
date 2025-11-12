@@ -9,7 +9,10 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="FinSync API", version="1.0.0")
 
-origins = config('CORS_ORIGINS', default='http://localhost:3000').split(',')
+origins = [
+    "https://fin-sync-phi.vercel.app/",  # Replace with your Vercel domain
+    "http://localhost:3000",                    # Keep for local testing
+]
 
 app.add_middleware(
     CORSMiddleware,
