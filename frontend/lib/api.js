@@ -1,12 +1,10 @@
 import axios from 'axios'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+export const API_BASE_URL = 'https://finsync-gu32.onrender.com'  // replace with your actual Render URL
 
 const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  baseURL: API_BASE_URL,
+  headers: { 'Content-Type': 'application/json' },
 })
 
 // Request interceptor
